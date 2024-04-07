@@ -148,6 +148,7 @@ public class CBO implements CKASTVisitor, ClassLevelMetric, MethodLevelMetric {
 		}
 	}
 
+	// Refatoração: método com código duplicado, praticcamente idêntico ao coupleTo do Coupling.java
 	private void coupleTo(Type type) {
 		if(type==null)
 			return;

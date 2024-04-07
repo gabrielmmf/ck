@@ -43,6 +43,8 @@ public class Runner {
       FileUtils.IGNORED_DIRECTORIES.add(args[i]);
     }
 
+
+		// Refatoração: Reduzir argumentos. Só precisamos de outputDir e variablesAndFields no construtor da classe ResultWriter
 		ResultWriter writer = new ResultWriter(outputDir + "class.csv", outputDir + "method.csv", outputDir + "variable.csv", outputDir + "field.csv", variablesAndFields);
 		
 		Map<String, CKClassResult> results = new HashMap<>();

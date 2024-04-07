@@ -74,6 +74,74 @@ public class Coupling implements CKASTVisitor, ClassLevelMetric, MethodLevelMetr
 		}
 	}
 
+
+	// Refatoração vist
+	/*
+	public void visit(TypeDeclaration node) {
+    	ITypeBinding resolvedType = node.resolveBinding();
+
+		if (resolvedType != null) {
+			processSuperclass(resolvedType);
+			processInterfaces(resolvedType);
+		} else {
+			processFallbackSuperclass(node);
+			processFallbackInterfaces(node);
+		}
+	}
+
+	private void processSuperclass(ITypeBinding typeBinding) {
+		ITypeBinding superClass = typeBinding.getSuperclass();
+		if (superClass != null) {
+			coupleTo(superClass);
+		}
+	}
+
+	private void processInterfaces(ITypeBinding typeBinding) {
+		for (ITypeBinding interfaceType : typeBinding.getInterfaces()) {
+			coupleTo(interfaceType);
+		}
+	}
+
+	private void processFallbackSuperclass(TypeDeclaration node) {
+		Type superClassType = node.getSuperclassType();
+		if (superClassType != null) {
+			ITypeBinding superClassBinding = superClassType.resolveBinding();
+			if (superClassBinding != null) {
+				coupleTo(superClassBinding);
+			}
+		}
+	}
+
+	private void processFallbackInterfaces(TypeDeclaration node) {
+		List<Type> interfaceTypes = node.superInterfaceTypes();
+		for (Type interfaceType : interfaceTypes) {
+			ITypeBinding interfaceBinding = interfaceType.resolveBinding();
+			if (interfaceBinding != null) {
+				coupleTo(interfaceBinding);
+			}
+		}
+	}
+
+	private void coupleTo(ITypeBinding typeBinding) {
+		if (typeBinding != null) {
+			String typeName = getTypeName(typeBinding);
+			addToSet(typeName);
+		}
+	}
+
+	private String getTypeName(ITypeBinding typeBinding) {
+		if (typeBinding.isArray()) {
+			return getTypeName(typeBinding.getElementType());
+		}
+		return typeBinding.getQualifiedName();
+	}
+
+	private void addToSet(String typeName) {
+		// Adicione a lógica para adicionar ao conjunto de acoplamento
+		this.coupling.add(typeName);
+	}
+	*/
+
 	public void visit(TypeDeclaration node) {
 		if(this.className != null) {
 			ITypeBinding resolvedType = node.resolveBinding();
@@ -195,6 +263,55 @@ public class Coupling implements CKASTVisitor, ClassLevelMetric, MethodLevelMetr
 		}
 	}
 
+	//Refatoração: Alteração da god class coupleTo
+	/*
+	private void coupleTo(Type type) {
+		if (type == null || this.className == null) {
+			return;
+		}
+
+		type.coupleTo(this);
+	}
+
+	private void coupleTo(SimpleType type) {
+		addToSet(type.getName().getFullyQualifiedName());
+	}
+
+	private void coupleTo(QualifiedType type) {
+		addToSet(type.getName().getFullyQualifiedName());
+	}
+
+	private void coupleTo(NameQualifiedType type) {
+		addToSet(type.getName().getFullyQualifiedName());
+	}
+
+	private void coupleTo(ParameterizedType type) {
+		coupleTo(type.getType());
+	}
+
+	private void coupleTo(WildcardType type) {
+		if (type.getBound() != null) {
+			coupleTo(type.getBound());
+		}
+	}
+
+	private void coupleTo(ArrayType type) {
+		coupleTo(type.getElementType());
+	}
+
+	private void coupleTo(IntersectionType type) {
+		type.types().forEach(this::coupleTo);
+	}
+
+	private void coupleTo(UnionType type) {
+		type.types().forEach(this::coupleTo);
+	}
+
+	// Método auxiliar para adicionar ao conjunto (pode ser ajustado conforme necessário)
+	private void addToSet(String name) {
+		// Implemente a lógica para adicionar ao conjunto
+	}	
+	*/
 	private void coupleTo(Type type) {
 		if(type==null)
 			return;

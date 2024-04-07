@@ -72,6 +72,43 @@ public class LCOMNormalized implements CKASTVisitor, ClassLevelMetric {
 		}
 		
 	}
+
+	//Refatoração:
+	/*
+	public void setResult(CKClassResult result) {
+		// Calculate LCOM (Lack of Cohesion in Methods) using Henderson-Sellers definition
+
+		// Total number of attributes and methods
+		int numberOfAttributes = this.declaredFields.size();
+		int numberOfMethods = this.methods.size();
+
+		// Calculate the sum of differences for LCOM
+		float sum = calculateLCOMSum(numberOfMethods);
+
+		// Compute LCOM normalized value if there are attributes
+		float lcomNormalized = (numberOfAttributes > 0) ? sum / numberOfAttributes : 0;
+
+		// Set the result in the CKClassResult object
+		result.setLcomNormalized(lcomNormalized);
+	}
+
+	// Helper method to calculate the LCOM sum
+	private float calculateLCOMSum(int numberOfMethods) {
+		float sum = 0;
+
+		// Iterate over each attribute
+		for (String attributeName : this.declaredFields.keySet()) {
+			// Calculate the difference for the attribute
+			int methodsAccessingAttribute = this.declaredFields.get(attributeName).size();
+			float difference = (float) (numberOfMethods - methodsAccessingAttribute);
+
+			// Add the normalized difference to the sum
+			sum += difference / numberOfMethods;
+		}
+
+		return sum;
+	}
+	*/
 	
 	@Override
 	public void setResult(CKClassResult result) {

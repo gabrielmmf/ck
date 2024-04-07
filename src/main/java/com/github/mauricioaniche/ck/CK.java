@@ -72,6 +72,65 @@ public class CK {
 		calculate(path.toString(), notifier);
 	}
 
+	// Refatoração:
+	/*
+	public void calculate(Path path, CKNotifier notifier, Path... javaFilePaths) {
+		String[] srcDirs = findSourceDirectories(path);
+		log.info("Found " + srcDirs.length + " src dirs");
+
+		String[] allDependencies = useJars ? findDependencies(path) : null;
+		if (useJars) {
+			log.info("Found " + (allDependencies != null ? allDependencies.length : 0) + " jar dependencies");
+		}
+
+		MetricsExecutor storage = new MetricsExecutor(classLevelMetrics, methodLevelMetrics, notifier);
+
+		List<String> strJavaFilePaths = prepareFilePaths(path, javaFilePaths);
+		processJavaFiles(strJavaFilePaths, srcDirs, allDependencies, storage);
+
+		log.info("Finished parsing");
+	}
+
+	private String[] findSourceDirectories(Path path) {
+		return FileUtils.getAllDirs(path.toString());
+	}
+
+	private String[] findDependencies(Path path) {
+		return FileUtils.getAllJars(path.toString());
+	}
+
+	private List<String> prepareFilePaths(Path path, Path... javaFilePaths) {
+		return Stream.of(javaFilePaths)
+				.map(file -> file.isAbsolute() ? file.toString() : path.resolve(file).toString())
+				.collect(Collectors.toList());
+	}
+
+	private void processJavaFiles(List<String> filePaths, String[] srcDirs, String[] allDependencies, MetricsExecutor storage) {
+		List<List<String>> partitions = Lists.partition(filePaths, maxAtOnce);
+		log.debug("Max partition size: " + maxAtOnce + ", total partitions=" + partitions.size());
+
+		for (List<String> partition : partitions) {
+			log.debug("Next partition");
+			ASTParser parser = createASTParser();
+
+			parser.setEnvironment(allDependencies, srcDirs, null, true);
+			parser.createASTs(partition.toArray(new String[0]), null, new String[0], storage, null);
+		}
+	}
+
+	private ASTParser createASTParser() {
+		ASTParser parser = ASTParser.newParser(AST.JLS11);
+		parser.setResolveBindings(true);
+		parser.setBindingsRecovery(true);
+
+		Map<String, String> options = JavaCore.getOptions();
+		JavaCore.setComplianceOptions(JavaCore.VERSION_11, options);
+		parser.setCompilerOptions(options);
+
+		return parser;
+	}
+	*/
+
 	/**
 	 * Calculate metrics for the passed javaFilePaths. Uses path to set the environment
 	 * @param path The environment to where the source code is located

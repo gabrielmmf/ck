@@ -16,6 +16,48 @@ public class NumberOfMethods implements CKASTVisitor, ClassLevelMetric {
 	private int finalMethods;
 	private int synchronizedMethods;
 
+	//Refatoração
+	/*
+	public void visit(MethodDeclaration node) {
+		countMethodVisibility(node);
+		countOtherCharacteristics(node);
+	}
+
+	private void countMethodVisibility(MethodDeclaration node) {
+		int modifiers = node.getModifiers();
+
+		if (Modifier.isPublic(modifiers)) {
+			publicMethods++;
+		} else if (Modifier.isPrivate(modifiers)) {
+			privateMethods++;
+		} else if (Modifier.isProtected(modifiers)) {
+			protectedMethods++;
+		} else {
+			defaultMethods++;
+		}
+	}
+
+	private void countOtherCharacteristics(MethodDeclaration node) {
+		int modifiers = node.getModifiers();
+
+		if (Modifier.isStatic(modifiers)) {
+			staticMethods++;
+		}
+
+		if (Modifier.isAbstract(modifiers)) {
+			abstractMethods++;
+		}
+
+		if (Modifier.isFinal(modifiers)) {
+			finalMethods++;
+		}
+
+		if (Modifier.isSynchronized(modifiers)) {
+			synchronizedMethods++;
+		}
+	}
+	*/
+
 	@Override
 	public void visit(MethodDeclaration node) {
 		methods++;

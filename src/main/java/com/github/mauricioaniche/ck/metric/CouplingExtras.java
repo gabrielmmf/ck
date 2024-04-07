@@ -102,6 +102,32 @@ public class CouplingExtras {
 		
 		return 0;
 	}
+
+	//Refatoração:
+	/*
+	private Map<String, Set<String>> clean(String componentName, Map<String, Set<String>> coupling) {
+		Set<String> componentCoupling = coupling.get(componentName);
+
+		if (componentCoupling == null || componentCoupling.isEmpty()) {
+			return coupling; // Se o conjunto de acoplamento for nulo ou vazio, retornar sem modificações
+		}
+
+		Set<String> singleQualifiedTypes = componentCoupling.stream()
+				.filter(type -> !type.contains("."))
+				.collect(Collectors.toSet());
+
+		singleQualifiedTypes.forEach(singleQualifiedType -> {
+			boolean hasFullyQualifiedType = componentCoupling.stream()
+					.anyMatch(type -> type.endsWith("." + singleQualifiedType));
+
+			if (hasFullyQualifiedType) {
+				componentCoupling.remove(singleQualifiedType);
+			}
+		});
+
+		return coupling;
+	}
+	*/
 	
 	private Map<String, Set<String>> clean(String componentName, Map<String, Set<String>> coupling) {
 		Set<String> singleQualifiedTypes = coupling.get(componentName).stream().filter(x -> !x.contains(".")).collect(Collectors.toSet());

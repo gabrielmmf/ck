@@ -44,6 +44,34 @@ public class LCOM implements CKASTVisitor, ClassLevelMetric {
 		methods.add(new TreeSet<String>());
 		
 	}
+
+	// Refatoração
+	/*
+	public void setResult(CKClassResult result) {
+		int lcom = calculateLcomValue();
+		result.setLcom(Math.max(lcom, 0));
+	}
+
+	private int calculateLcomValue() {
+		int lcom = 0;
+		for (int i = 0; i < methods.size(); i++) {
+			for (int j = i + 1; j < methods.size(); j++) {
+				if (isEmptySetIntersection(methods.get(i), methods.get(j))) {
+					lcom++;
+				} else {
+					lcom--;
+				}
+			}
+		}
+		return lcom;
+	}
+
+	private boolean isEmptySetIntersection(TreeSet<?> set1, TreeSet<?> set2) {
+		TreeSet<?> intersection = new TreeSet<>(set1);
+		intersection.retainAll(set2);
+		return intersection.isEmpty();
+	}
+	*/
 	
 	@Override
 	public void setResult(CKClassResult result) {

@@ -21,6 +21,42 @@ public class NumberOfFields implements CKASTVisitor, ClassLevelMetric {
 	private int finalFields;
 	private int synchronizedFields;
 
+	//Refatoração:
+
+	/* 
+	public void visit(FieldDeclaration node) {
+	fields++;
+	fieldNames.addAll(getVariableName(node.fragments()));
+
+	boolean isPublic = Modifier.isPublic(node.getModifiers());
+	boolean isPrivate = Modifier.isPrivate(node.getModifiers());
+	boolean isProtected = Modifier.isProtected(node.getModifiers());
+
+	if(isPublic)
+		publicFields++;
+	else if(isPrivate)
+		privateFields++;
+	else if(isProtected)
+		protectedFields++;
+	else
+		defaultFields++;
+
+	// other characteristics rather than visibility
+	boolean isStatic = Modifier.isStatic(node.getModifiers());
+	boolean isFinal = Modifier.isFinal(node.getModifiers());
+	boolean isSynchronized = Modifier.isSynchronized(node.getModifiers());
+	
+	if(isStatic)
+		staticFields++;
+
+	if(isFinal)
+		finalFields++;
+
+	if(isSynchronized)
+		synchronizedFields++;
+
+	} */
+
 	@Override
 	public void visit(FieldDeclaration node) {
 		fields++;
